@@ -14,8 +14,12 @@ class PhoneBook(list: List<Contact>) {
 
     fun remove(contact: Contact) = contacts.remove(contact)
 
+    fun update(id: Int, contact: Contact) {
+        contacts[id] = contact
+    }
+
     fun find(search: String): PhoneBook = PhoneBook(contacts.filter { contact ->
-        contact.firstName.contains(search) || contact.lastName.contains(search) || contact.numbers.map { it.number.contains(search) }.find { it } ?: false
+        contact.firstName.contains(search) || contact.lastName.contains(search) || contact.numbers.any { it.number.contains(search) }
     })
 
     override fun toString() = StringBuilder().apply {
