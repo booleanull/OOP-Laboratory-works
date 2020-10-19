@@ -1,5 +1,4 @@
-fun main(args: Array<String>) {
-
+fun main() {
     val phoneBook = PhoneBook()
     val contact = Contact("Ivan", "Ivanov", listOf(
         PhoneNumber("+71000000002", PhoneNumber.PhoneType.WORK),

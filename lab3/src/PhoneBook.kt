@@ -1,15 +1,24 @@
 class PhoneBook(list: List<Contact>) {
 
-    constructor(): this(listOf())
-
     private val contacts: MutableList<Contact> = list.toMutableList()
 
-    fun getValue(id: Int): Contact = contacts[id]
+    constructor(): this(listOf())
 
-    operator fun get(id: Int): Contact = getValue(id)
+    fun getValue(id: Int): Contact? = contacts.getOrNull(id)
 
-    fun update(id: Int, contact: Contact) {
+    operator fun get(id: Int): Contact? = getValue(id)
+
+    fun update(id: Int, contact: Contact): Boolean {
+        contacts.getOrNull(id) ?: return false
         contacts[id] = contact
+        return true
+    }
+
+    fun update(current: Contact, contact: Contact): Boolean {
+        val index = contacts.indexOf(current)
+        if (index == -1) return false
+        contacts[index] = contact
+        return true
     }
 
     operator fun set(id: Int, contact: Contact) = update(id, contact)
@@ -22,13 +31,5 @@ class PhoneBook(list: List<Contact>) {
         contact.firstName.contains(search) || contact.lastName.contains(search) || contact.numbers.any { it.number.contains(search) }
     })
 
-    override fun toString() = StringBuilder().apply {
-        if (contacts.isEmpty()) append("Phone book is empty")
-        else {
-            contacts.forEachIndexed { index, contact ->
-                append(contact)
-                if (index != contacts.size - 1) append("\n")
-            }
-        }
-    }.toString()
+    override fun toString() = if (contacts.isNotEmpty()) contacts.joinToString(separator = "\n") else "Phone book is empty"
 }
