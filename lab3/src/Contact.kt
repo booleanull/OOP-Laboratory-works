@@ -2,7 +2,9 @@ data class Contact(val firstName: String, val lastName: String, val numbers: Lis
 
     override fun toString() = StringBuilder().apply {
         append("$firstName $lastName: ")
-        if (numbers.isEmpty()) append("No numbers")
+        if (numbers.isEmpty()) {
+            append("No numbers")
+        }
         else {
             numbers.forEachIndexed { index, phoneNumber ->
                 append(phoneNumber)

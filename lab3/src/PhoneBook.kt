@@ -4,19 +4,19 @@ class PhoneBook(list: List<Contact>) {
 
     private val contacts: MutableList<Contact> = list.toMutableList()
 
-    operator fun get(id: Int): Contact = contacts[id]
+    fun getValue(id: Int): Contact = contacts[id]
 
-    operator fun set(id: Int, contact: Contact) {
-        contacts[id] = contact
-    }
-
-    fun add(contact: Contact) = contacts.add(contact)
-
-    fun remove(contact: Contact) = contacts.remove(contact)
+    operator fun get(id: Int): Contact = getValue(id)
 
     fun update(id: Int, contact: Contact) {
         contacts[id] = contact
     }
+
+    operator fun set(id: Int, contact: Contact) = update(id, contact)
+
+    fun add(contact: Contact) = contacts.add(contact)
+
+    fun remove(contact: Contact) = contacts.remove(contact)
 
     fun find(search: String): PhoneBook = PhoneBook(contacts.filter { contact ->
         contact.firstName.contains(search) || contact.lastName.contains(search) || contact.numbers.any { it.number.contains(search) }

@@ -1,6 +1,6 @@
 import shapes.*
 
-fun main(args: Array<String>) {
+fun main() {
     val shapes = listOf(
         Circle(2.0),
         Circle(3.0),
@@ -12,7 +12,7 @@ fun main(args: Array<String>) {
         Triangle(5.0, 3.0, 5.0)
     )
 
-    println("Total S: ${shapes.map { it.getArea() }.sum()}")
+    println("Total S: ${shapes.sumByDouble { it.getArea() }}")
     println("Max P: ${shapes.maxBy { it.getPerimeter() }}")
     println("Min P: ${shapes.minBy { it.getPerimeter() }}")
     println("Max S: ${shapes.maxBy { it.getArea() }}")

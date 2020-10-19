@@ -5,10 +5,8 @@ import kotlin.math.sqrt
 class Triangle(val a: Double, val b: Double, val c: Double) : Shape {
 
     init {
-        if (a <= 0 || b <= 0 || c <= 0)
-            throw IllegalArgumentException("Can not create triangle")
-
-        if (a + b <= c || a + c <= b || b + c <= a)
+        if (a + b <= c || a + c <= b || b + c <= a ||
+                a <= 0 || b <= 0 || c <= 0)
             throw IllegalArgumentException("Can not create triangle")
     }
 

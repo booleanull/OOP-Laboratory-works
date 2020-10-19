@@ -1,5 +1,5 @@
-fun main(args: Array<String>) {
-    val matrixA = SquareMatrix(arrayOf(arrayOf(0, 2, 4), arrayOf(6, 8, 10), arrayOf(12, 14, 16)))
+fun main() {
+    val matrixA = Matrix(arrayOf(arrayOf(0, 2, 4), arrayOf(6, 8, 10), arrayOf(12, 14, 16)))
     val matrixB = Matrix(arrayOf(arrayOf(0, 1, 2), arrayOf(3, 4, 5), arrayOf(6, 7, 8)))
 
     println("A: $matrixA")
