@@ -1,15 +1,17 @@
 import kotlin.math.pow
 
-class IntMatrix(private val array: Array<Array<Int>>) : Matrix<Int> {
+class IntMatrix(array: Array<Array<Int>>) : Matrix<Int> {
+
+    private val matrix = Array(array.size) { x -> array[x].clone() }
 
     private var rows: Int = 0
     private var columns: Int = 0
 
     init {
-        if (array.isEmpty() || array[0].isEmpty()) throw IllegalArgumentException("Array can not be empty")
-        rows = array.size
-        columns = array[0].size
-        array.find { it.size != columns }?.let { throw IllegalArgumentException("Array can not be like this") }
+        if (matrix.isEmpty() || matrix[0].isEmpty()) throw IllegalArgumentException("Array can not be empty")
+        rows = matrix.size
+        columns = matrix[0].size
+        matrix.find { it.size != columns }?.let { throw IllegalArgumentException("Array can not be like this") }
     }
 
     override fun getRows() = rows
@@ -17,14 +19,14 @@ class IntMatrix(private val array: Array<Array<Int>>) : Matrix<Int> {
     override fun getColumns() = columns
 
     override fun getValue(x: Int, y: Int): Int {
-        return array.getOrNull(x)?.getOrNull(y) ?: throw ArrayIndexOutOfBoundsException("Incorrect indexes")
+        return matrix.getOrNull(x)?.getOrNull(y) ?: throw ArrayIndexOutOfBoundsException("Incorrect indexes")
     }
 
     operator fun get(x: Int, y: Int) = getValue(x, y)
 
     override fun setValue(x: Int, y: Int, value: Int) {
-        array.getOrNull(x)?.getOrNull(y) ?: throw ArrayIndexOutOfBoundsException("Incorrect indexes")
-        array[x][y] = value
+        matrix.getOrNull(x)?.getOrNull(y) ?: throw ArrayIndexOutOfBoundsException("Incorrect indexes")
+        matrix[x][y] = value
     }
 
     operator fun set(x: Int, y: Int, value: Int) = setValue(x, y, value)
@@ -70,7 +72,7 @@ class IntMatrix(private val array: Array<Array<Int>>) : Matrix<Int> {
 
     override fun determinant(): Int {
         if (rows != columns) throw IllegalStateException("Can not get determinant")
-        return determinant(array)
+        return determinant(matrix)
     }
 
     private fun determinant(array: Array<Array<Int>>): Int {
@@ -97,14 +99,14 @@ class IntMatrix(private val array: Array<Array<Int>>) : Matrix<Int> {
         }
     }
 
-    override fun toString(): String = array.joinToString(
+    override fun toString(): String = matrix.joinToString(
         prefix = "[",
         postfix = "]",
         transform = { array -> array.joinToString(prefix = "[", postfix = "]") }
     )
 
     override fun hashCode(): Int {
-        var result = array.contentDeepHashCode()
+        var result = matrix.contentDeepHashCode()
         result = 31 * result + rows
         result = 31 * result + columns
         return result
@@ -116,7 +118,7 @@ class IntMatrix(private val array: Array<Array<Int>>) : Matrix<Int> {
 
         other as IntMatrix
 
-        if (!array.contentDeepEquals(other.array)) return false
+        if (!matrix.contentDeepEquals(other.matrix)) return false
         if (rows != other.rows) return false
         if (columns != other.columns) return false
 
