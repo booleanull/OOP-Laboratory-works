@@ -6,7 +6,7 @@ import java.lang.reflect.Type
 
 class ShapeSource : JsonSource<Shape>() {
 
-    override val path: String = "shapes.txt"
+    override val path: String = "shapes.json"
 
     override val gson: Gson = GsonBuilder().run {
         registerTypeAdapter(Shape::class.java, InterfaceAdapter())
