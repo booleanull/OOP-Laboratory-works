@@ -5,11 +5,11 @@ import java.lang.reflect.Type
 
 abstract class JsonSource<T> {
 
-    abstract val path: String
+    protected abstract val path: String
 
-    abstract val gson: Gson
+    protected abstract val gson: Gson
 
-    abstract val type: Type
+    protected abstract val type: Type
 
     abstract val handler: ErrorHandler
 
