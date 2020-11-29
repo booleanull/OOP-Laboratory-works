@@ -1,1 +1,0 @@
-[{"name":"shapes.Circle","item":{"radius":4.0}},{"name":"shapes.Rectangle","item":{"a":2.0,"b":2.0}},{"name":"shapes.Square","item":{"a":3.0}}]
